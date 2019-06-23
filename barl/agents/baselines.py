@@ -76,7 +76,7 @@ class StateLessEpsilonQLearning(BaseStateLessAgent):
 
         else:
 
-            action = np.argmin(self.Q.get_estimate())
+            action = np.argmax(self.Q.get_estimate())
 
         return np.squeeze(action)
 
