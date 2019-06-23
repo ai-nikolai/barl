@@ -1,1 +1,3 @@
 .DS_Store
+barl.egg-info
+__pycache__
