@@ -25,21 +25,14 @@ import numpy as np
 # CODE
 ####################################################
 
-class BaseFixedActionAgent(metaclass=ABCMeta):
+class StateLessEnvironment(metaclass=ABCMeta):
     """
     State Less
 
     Fixed Actions
     """
-    def __init__(self, numActions):
-        self.numActions = numActions
-        
     @abstractmethod
-    def learn(self):
-        raise NotImplementedError
-
-    @abstractmethod
-    def take_action(self, N):
+    def sample_rewards(self, action=None, N=1):
         raise NotImplementedError
 
 

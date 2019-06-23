@@ -13,34 +13,17 @@
 ####################################################
 
 # >>>>>>  Native Imports  <<<<<<<
-from abc import ABCMeta, abstractmethod
 
 # >>>>>>  Package Imports <<<<<<<
-import numpy as np
 
 # >>>>>>  Local Imports   <<<<<<<
-
+from .multi_armed_bandit import MultiArmedBandit
 
 ####################################################
 # CODE
 ####################################################
 
-class BaseFixedActionAgent(metaclass=ABCMeta):
-    """
-    State Less
 
-    Fixed Actions
-    """
-    def __init__(self, numActions):
-        self.numActions = numActions
-        
-    @abstractmethod
-    def learn(self):
-        raise NotImplementedError
-
-    @abstractmethod
-    def take_action(self, N):
-        raise NotImplementedError
 
 
 

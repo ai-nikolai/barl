@@ -14,7 +14,7 @@
 import numpy as np
 
 # >>>>>>  Local Imports   <<<<<<<
-from barl import simple_environments
+from barl import environments
 
 
 
@@ -24,7 +24,7 @@ from barl import simple_environments
 
 
 def test_that_MAB_works():
-    mab = simple_environments.MultiArmedBandit()
+    mab = environments.MultiArmedBandit()
 
     rewards = mab.sample_rewards(N=3)
 

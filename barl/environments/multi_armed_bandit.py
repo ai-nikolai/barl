@@ -22,13 +22,14 @@ from functools import partial
 import numpy as np
 
 # >>>>>>  Local Imports   <<<<<<<
+from .interfaces import StateLessEnvironment
 
 
 ####################################################
 # CODE
 ####################################################
 
-class MultiArmedBandit(object):
+class MultiArmedBandit(StateLessEnvironment):
     """
     MultiArmedbandit - MAB
     """
@@ -53,17 +54,22 @@ class MultiArmedBandit(object):
         self.__set_arms()
 
 
-    def sample_rewards(self, N):
+    def sample_rewards(self, action=None, N=1):
         """
         samples rewards: np.array ( size[arms,N] )
         """
-        outList = []
+        if not action:
 
-        for arm in self.arms:
+            outList = []
 
-            outList.append( arm(N) )
+            for arm in self.arms:
 
-        return np.array( outList )
+                outList.append( arm(N) )
+
+            return np.array( outList )
+
+        else:
+            return self.arm[action](N)
 
 
     def get_true_variances(self):

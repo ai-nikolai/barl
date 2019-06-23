@@ -20,11 +20,12 @@ import numpy as np
 # >>>>>>  Local Imports   <<<<<<<
 from barl.utils import numerical
 
+from .interfaces import BaseEstimator
 ####################################################
 # CODE
 ####################################################
 
-class EmpiricalMean(object):
+class EmpiricalMean(BaseEstimator):
     """
     Estimating 1D Vectors
     """
@@ -89,7 +90,7 @@ class EmpiricalMean(object):
         """
         if type(oneHotIndexList) == type(None):
             self.__count += newValue.shape[0]
-            
+
         else:
             self.__count += np.sum( oneHotIndexList, axis=0 )
 

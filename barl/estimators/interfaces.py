@@ -25,22 +25,18 @@ import numpy as np
 # CODE
 ####################################################
 
-class BaseFixedActionAgent(metaclass=ABCMeta):
+class BaseEstimator(metaclass=ABCMeta):
     """
-    State Less
-
-    Fixed Actions
+    Base Interface for Estimators
     """
-    def __init__(self, numActions):
-        self.numActions = numActions
-        
     @abstractmethod
-    def learn(self):
+    def update(self):
         raise NotImplementedError
 
     @abstractmethod
-    def take_action(self, N):
+    def get_estimate(self):
         raise NotImplementedError
+
 
 
 

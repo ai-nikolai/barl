@@ -17,12 +17,16 @@
 # >>>>>>  Package Imports <<<<<<<
 
 # >>>>>>  Local Imports   <<<<<<<
-from barl.simple_environments.multi_armed_bandit import MultiArmedBandit
+
 
 ####################################################
 # CODE
 ####################################################
-
+def unzip(zipedList):
+    """
+    unzips
+    """
+    return list( zip( *zipedList ) )[0]
 
 
 
