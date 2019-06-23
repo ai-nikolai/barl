@@ -38,9 +38,9 @@ setup(
       #
 
       name          ='barl',
-      version       ='1.0.0.0',
-      description   ='Wluper Machine Learning Library',
-      url           ='https://bitbucket.org/wluperdevteam/wluper-ml',
+      version       ='0.0.0.1',
+      description   ='Bayesian Approximate Reinforcement Learning (BARL)',
+      url           ='https://github.com/ai-nikolai/barl',
       author        ='nikolai rozanov',
       author_email  ='nikolai.rozanov@gmail.com',
       license       ='MIT',
