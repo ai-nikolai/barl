@@ -43,7 +43,7 @@ setup(
       url           ='https://bitbucket.org/wluperdevteam/wluper-ml',
       author        ='nikolai rozanov',
       author_email  ='nikolai.rozanov@gmail.com',
-      license       ='Apache 2.0',
+      license       ='MIT',
 
       #
       # Actual packages, data and scripts
@@ -51,16 +51,11 @@ setup(
 
       packages      = find_packages(),
 
-      package_dir   = {'wluperml': 'wluperml'},
-
-
-      # package_data = {
-      #   'wlupernlp' : extra_files
-      # },
+      package_dir   = {'barl': 'barl'},
 
       install_requires=[
-                        "numpy",
-                        "torch",
+                        # "numpy",
+                        # "torch",
                        ],
 
       python_requires='>=3.6'
