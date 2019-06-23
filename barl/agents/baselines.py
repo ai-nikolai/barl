@@ -32,18 +32,36 @@ class RandomActionsSampler(StateLessFixedActionsAgent):
     def __init__(self,numActions):
         super().__init__(numActions)
 
+    def learn(self):
+        pass
+
     def take_action(self, N):
         return np.random.choice( self.numActions, [N] )
 
 
-class StateLessQLearning(StateLessFixedActionsAgent):
+
+class StateLessEpsilonQLearning(StateLessFixedActionsAgent):
     """
     standard Q-learning algorithm
     """
 
     def __init__(self, numActions):
         super().__init__(numActions)
-        self.Q =
+        self.Q = estimators.baselines.EmpiricalMean( [numActions] )
+
+    def learn(self, actionRewardTupleList):
+        """
+        """
+        assert actionRewardTupleList == list, "{} can only learn from List of [(Action, Reward)]"
+
+        self.Q.update(  )
+
+    def take_action(self, N, epsilon=0.05 ):
+        """
+        takes an action according to epsilon greedy policy
+        """
+
+
 
 
 

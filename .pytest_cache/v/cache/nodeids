@@ -1,0 +1,5 @@
+[
+  "tests/test_multi_armed_bandit.py::test_that_MAB_works",
+  "tests/test_utils_numerical.py::test_one_hot_works",
+  "tests/test_utils_numerical.py::test_valued_one_hot_works"
+]
