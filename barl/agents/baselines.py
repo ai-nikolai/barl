@@ -18,7 +18,8 @@
 import numpy as np
 
 # >>>>>>  Local Imports   <<<<<<<
-from barl.agents import estimators
+from barl import estimators
+
 from barl.agents.interfaces import StateLessFixedActionsAgent
 
 ####################################################
