@@ -1,9 +1,0 @@
-[
-  "tests/test_estimators.py::test_empirical_mean_1",
-  "tests/test_estimators.py::test_empirical_mean_2",
-  "tests/test_estimators.py::test_empirical_mean_3",
-  "tests/test_estimators.py::test_empirical_mean_4",
-  "tests/test_multi_armed_bandit.py::test_that_MAB_works",
-  "tests/test_utils_numerical.py::test_one_hot_works",
-  "tests/test_utils_numerical.py::test_valued_one_hot_works"
-]
