@@ -66,11 +66,14 @@ class MultiArmedBandit(StateLessEnvironment):
 
                 outList.append( arm(N) )
 
-            return np.array( outList )
+            rewards = np.array( outList )
 
         else:
 
-            return self.arms[ int(action) ](N)
+            rewards = self.arms[ int(action) ](N)
+
+        return np.squeeze( rewards )
+
 
 
     def get_true_variances(self):

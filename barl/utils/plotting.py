@@ -13,12 +13,18 @@
 ####################################################
 
 # >>>>>>  Native Imports  <<<<<<<
+import warnings
+warnings.filterwarnings("ignore")
 
 # >>>>>>  Package Imports <<<<<<<
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 # >>>>>>  Local Imports   <<<<<<<
 from barl.utils.utils import unzip
+
+
+
 ####################################################
 # CODE
 ####################################################
@@ -34,7 +40,7 @@ def action_reward_barplot(arlist):
 
     sns.barplot(x="actions", y="rewards", data=data)
 
-
+    plt.show()
 
 
 

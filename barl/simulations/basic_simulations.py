@@ -37,11 +37,9 @@ def run_state_less_agent_and_env(agent, environment, N=10):
 
     for t in range(N):
 
-        action = agent.take_action()
-        print(action)
-        reward = environment.sample_rewards(action=action)
-        print(reward)
-        
+        action = int( agent.take_action() )
+        reward = float( environment.sample_rewards(action=action) )
+
         ARList.append( (action, reward) )
         totalReward += reward
 

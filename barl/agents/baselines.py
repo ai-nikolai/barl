@@ -34,13 +34,15 @@ class RandomActionsSampler(BaseStateLessAgent):
     def __init__(self,numActions):
         super().__init__(numActions)
 
-    def learn(self):
+    def learn(self, arList):
         pass
 
     def take_action(self):
         action =  np.random.choice( self.numActions, 1 )
 
-        return action
+        return np.squeeze(action)
+
+
 
 
 class StateLessEpsilonQLearning(BaseStateLessAgent):
@@ -52,6 +54,7 @@ class StateLessEpsilonQLearning(BaseStateLessAgent):
         super().__init__(numActions)
         self.Q = estimators.baselines.EmpiricalMean( [numActions] )
 
+
     def learn(self, actionRewardTupleList):
         """
         Learns from a list of ActionReward Tuples
@@ -59,6 +62,7 @@ class StateLessEpsilonQLearning(BaseStateLessAgent):
 
         actions, rewards = utils.unzip( actionRewardTupleList )
         self.Q.update( newValueOrList=rewards, indexList=actions )
+
 
     def take_action(self, epsilon=0.05 ):
         """
@@ -74,7 +78,7 @@ class StateLessEpsilonQLearning(BaseStateLessAgent):
 
             action = np.argmin(self.Q.get_estimate())
 
-        return action
+        return np.squeeze(action)
 
 
 
