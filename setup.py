@@ -8,14 +8,63 @@
 #
 ####################################################
 
+####################################################
+# IMPORT STATEMENTS
+####################################################
+
 # >>>>>>  Native Imports  <<<<<<<
-import setuptools
+from setuptools import setup, find_packages
 
 # >>>>>>  Package Imports <<<<<<<
 
 # >>>>>>  Local Imports   <<<<<<<
 
 
+####################################################
+# CODE
+####################################################
 
 
-#
+
+
+
+####################################################
+# MAIN
+####################################################
+setup(
+
+      #
+      # SETUP
+      #
+
+      name          ='barl',
+      version       ='1.0.0.0',
+      description   ='Wluper Machine Learning Library',
+      url           ='https://bitbucket.org/wluperdevteam/wluper-ml',
+      author        ='nikolai rozanov',
+      author_email  ='nikolai.rozanov@gmail.com',
+      license       ='Apache 2.0',
+
+      #
+      # Actual packages, data and scripts
+      #
+
+      packages      = find_packages(),
+
+      package_dir   = {'wluperml': 'wluperml'},
+
+
+      # package_data = {
+      #   'wlupernlp' : extra_files
+      # },
+
+      install_requires=[
+                        "numpy",
+                        "torch",
+                       ],
+
+      python_requires='>=3.6'
+
+      )
+
+# EOF
