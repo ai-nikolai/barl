@@ -36,7 +36,7 @@ def test_that_MAB_samples_actions_correctly():
 
     rewards = mab.sample_rewards(action=0)
 
-    assert rewards.shape == (1,) , "MAB action rewards have wrong shape"
+    assert rewards.shape == () , "MAB action rewards have wrong shape"
 
 
 
