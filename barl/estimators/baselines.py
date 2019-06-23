@@ -31,7 +31,7 @@ class EmpiricalMean(BaseEstimator):
     """
     def __init__(self, size):
         assert len(size) < 2, "EmpiricalMean only does 1D estimates at the moment"
-        self.__mean = np.zeros(size)
+        self.__estimate = np.zeros(size)
         self.__value = np.zeros(size)
         self.__count = np.zeros(size)
         self.__shape = self.__value.shape
@@ -54,7 +54,7 @@ class EmpiricalMean(BaseEstimator):
         elif (newValue.ndim == self.__value.ndim+1) and (newValue.shape[1]==self.__value.shape[0]):
             self.__update_multiple_values(newValue, oneHotIndexList)
 
-        self.__mean = np.divide(self.__value, self.__count, where=self.__count>0)
+        self.__estimate = np.divide(self.__value, self.__count, where=self.__count>0)
 
 
 
@@ -62,7 +62,7 @@ class EmpiricalMean(BaseEstimator):
         """
         returns the current estimate (of the mean)
         """
-        return self.__mean
+        return self.__estimate
 
 
 

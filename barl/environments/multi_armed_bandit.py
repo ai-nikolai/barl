@@ -58,7 +58,7 @@ class MultiArmedBandit(StateLessEnvironment):
         """
         samples rewards: np.array ( size[arms,N] )
         """
-        if not action:
+        if type(action)==type(None):
 
             outList = []
 
@@ -69,7 +69,8 @@ class MultiArmedBandit(StateLessEnvironment):
             return np.array( outList )
 
         else:
-            return self.arm[action](N)
+
+            return self.arms[ int(action) ](N)
 
 
     def get_true_variances(self):

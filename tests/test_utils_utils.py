@@ -17,16 +17,23 @@
 # >>>>>>  Package Imports <<<<<<<
 
 # >>>>>>  Local Imports   <<<<<<<
-
-from . import plotting
-from . import numerical
-from . import utils
+from barl.utils import utils
 
 ####################################################
 # CODE
 ####################################################
 
 
+def test_unzip():
+    x = [1,2,3]
+    y = [4,5,6]
+
+    z = zip(x,y)
+
+    v,w = utils.unzip(z)
+
+    assert v==x, "Unzip 1"
+    assert w==y, "Unzip 2"
 
 
 
@@ -35,6 +42,10 @@ from . import utils
 ####################################################
 # MAIN
 ####################################################
+
+if __name__=="__main__":
+    print("hi")
+
 
 
 # EOF

@@ -31,7 +31,12 @@ def test_that_MAB_works():
     assert rewards.shape == (2,3), "MAB rewards have wrong shape"
 
 
+def test_that_MAB_samples_actions_correctly():
+    mab = environments.MultiArmedBandit()
 
+    rewards = mab.sample_rewards(action=0)
+
+    assert rewards.shape == (1,) , "MAB action rewards have wrong shape"
 
 
 
@@ -39,19 +44,30 @@ def test_that_MAB_works():
 # MAIN
 ####################################################
 if __name__ == "__main__":
-    mab = simple_environments.MultiArmedBandit()
+    mab = environments.MultiArmedBandit()
 
-    rewards = mab.sample_rewards(N=3)
+    rewards = mab.sample_rewards(action=0)
 
-    print(rewards)
+    print(mab.arms[0]())
 
-    print(rewards.shape)
+    # print(rewards)
+    #
+    # print(rewards.shape)
+    #
+    # print(mab.get_true_means())
+    #
+    # print(mab.get_true_variances())
+    #
+    # rewards = mab.sample_rewards(action=1)
+    # print(rewards)
+    #
+    # print(rewards.shape)
+    #
+    # print(mab.get_true_means())
+    #
+    # print(mab.get_true_variances())
 
-    print(mab.get_true_means())
 
-    print(mab.get_true_variances())
 
 
 # EOF
-
-#

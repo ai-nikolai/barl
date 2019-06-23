@@ -17,10 +17,7 @@
 # >>>>>>  Package Imports <<<<<<<
 
 # >>>>>>  Local Imports   <<<<<<<
-
-from . import plotting
-from . import numerical
-from . import utils
+import barl
 
 ####################################################
 # CODE
@@ -30,11 +27,21 @@ from . import utils
 
 
 
-
-
 ####################################################
 # MAIN
 ####################################################
+if __name__=="__main__":
+    env = barl.environments.MultiArmedBandit(arms=4)
+
+    agent = barl.agents.baselines.RandomActionsSampler(numActions=4)
+
+    total, arlist = barl.simulations.run_state_less_agent_and_env( environment=env, agent=agent, N=100)
+
+    print(total)
+
+    barl.utils.plotting.action_reward_barplot(arlist)
+
+
 
 
 # EOF

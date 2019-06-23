@@ -21,13 +21,13 @@ import numpy as np
 from barl import estimators
 from barl.utils import utils
 
-from .interfaces import BaseFixedActionAgent
+from .interfaces import BaseStateLessAgent
 
 ####################################################
 # CODE
 ####################################################
 
-class RandomActionsSampler(BaseFixedActionAgent):
+class RandomActionsSampler(BaseStateLessAgent):
     """
     simply random actions
     """
@@ -37,12 +37,13 @@ class RandomActionsSampler(BaseFixedActionAgent):
     def learn(self):
         pass
 
-    def take_action(self, N):
-        return np.random.choice( self.numActions, [N] )
+    def take_action(self):
+        action =  np.random.choice( self.numActions, 1 )
+
+        return action
 
 
-
-class StateLessEpsilonQLearning(BaseFixedActionAgent):
+class StateLessEpsilonQLearning(BaseStateLessAgent):
     """
     standard Q-learning algorithm
     """
@@ -59,7 +60,7 @@ class StateLessEpsilonQLearning(BaseFixedActionAgent):
         actions, rewards = utils.unzip( actionRewardTupleList )
         self.Q.update( newValueOrList=rewards, indexList=actions )
 
-    def take_action(self, N, epsilon=0.05 ):
+    def take_action(self, epsilon=0.05 ):
         """
         takes an action according to epsilon greedy policy
         """
@@ -67,11 +68,13 @@ class StateLessEpsilonQLearning(BaseFixedActionAgent):
 
         if tempRand<epsilon:
 
-            return np.random.choice(self.numActions)
+            action = np.random.choice(self.numActions)
 
         else:
 
-            return np.argmin(self.Q.get_estimate())
+            action = np.argmin(self.Q.get_estimate())
+
+        return action
 
 
 

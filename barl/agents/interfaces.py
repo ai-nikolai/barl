@@ -25,7 +25,7 @@ import numpy as np
 # CODE
 ####################################################
 
-class BaseFixedActionAgent(metaclass=ABCMeta):
+class BaseStateLessAgent(metaclass=ABCMeta):
     """
     State Less
 
@@ -33,7 +33,7 @@ class BaseFixedActionAgent(metaclass=ABCMeta):
     """
     def __init__(self, numActions):
         self.numActions = numActions
-        
+
     @abstractmethod
     def learn(self):
         raise NotImplementedError
