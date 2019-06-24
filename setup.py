@@ -56,7 +56,7 @@ setup(
       install_requires=[
                         "numpy",
                         "matplotlib",
-                        "seaborn<=0.9",
+                        "seaborn>=0.9",
                        ],
 
       python_requires='>=3.6'
