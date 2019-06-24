@@ -30,20 +30,14 @@ import matplotlib.pyplot as plt
 ####################################################
 sns.set(style="whitegrid")
 
-
-
-
-
-
-####################################################
-# MAIN
-####################################################
-if __name__ == "__main__":
+def tips_data():
     tips = sns.load_dataset("tips")
     # print(tips)
     # print(tips["day"])
     print( type(tips["day"]) )
 
+
+def custom_plotting():
     x = np.array([1,1,2,2])
     y = np.array([1,2,4,5])
     data = {"day":x,"total_bill":y}
@@ -51,6 +45,21 @@ if __name__ == "__main__":
     ax = sns.barplot(x="day", y="total_bill", data=data)
 
     plt.show()
+
+
+def fmri_data():
+    fmri = sns.load_dataset("fmri")
+    print( fmri )
+    print( fmri["signal"] )
+    print( fmri["timepoint"] )
+
+####################################################
+# MAIN
+####################################################
+if __name__ == "__main__":
+
+    fmri_data()
+
 
 
 # EOF
