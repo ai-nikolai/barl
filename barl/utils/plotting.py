@@ -30,19 +30,80 @@ from barl.utils.utils import unzip
 ####################################################
 sns.set(style="whitegrid")
 
-def action_reward_barplot(arlist):
+def action_reward_barplot(arList, show=True):
     """
     plots a barplot
     """
-    actions, rewards = unzip(arlist)
-
-    data = {"actions": list(actions), "rewards":list(rewards)}
+    data = transform_arlist_to_data(arList)
 
     sns.barplot(x="actions", y="rewards", data=data)
 
-    plt.show()
+    if show:
+        plt.show()
 
 
+def plot_reward_over_time_from_ar(arList, show=True):
+    """
+    plots reward over time
+    """
+    data = transform_arlist_to_data(arList)
+
+    sns.lineplot( x=data["time"], y=data["rewards"] )
+
+    if show:
+        plt.show()
+
+
+
+def plot_reward_over_time(trList, show=True):
+    """
+    plots reward over time
+    """
+    data = transform_trlist_to_data(trList)
+
+    sns.lineplot( x=data["time"], y=data["rewards"] )
+
+    if show:
+        plt.show()
+
+def plot_actions_over_time_from_ar(arList, show=True):
+    """
+    plots reward over time
+    """
+    data = transform_arlist_to_data(arList)
+
+    sns.lineplot( x=data["time"], y=data["actions"] )
+
+    if show:
+        plt.show()
+
+
+
+
+
+
+
+
+
+def transform_trlist_to_data(trList):
+    """
+    """
+    timeSteps, rewards = unzip(trList)
+
+    data = {"rewards":list(rewards), "time": timeSteps}
+
+    return data
+
+def transform_arlist_to_data(arList):
+    """
+    """
+    actions, rewards = unzip(arList)
+
+    timeSteps = range( len(actions) )
+
+    data = {"actions": list(actions), "rewards":list(rewards), "time": timeSteps}
+
+    return data
 
 ####################################################
 # MAIN

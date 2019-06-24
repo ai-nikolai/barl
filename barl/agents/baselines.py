@@ -44,14 +44,33 @@ class RandomActionsSampler(BaseStateLessAgent):
 
 
 
+class FixedActionsSampler(BaseStateLessAgent):
+    """
+    simply random actions
+    """
+    def __init__(self,numActions, fixedAction):
+        super().__init__(numActions)
+        self.fixedAction = fixedAction
+
+    def learn(self, arList):
+        pass
+
+    def take_action(self, action=None):
+        if type(action)==type(None):
+            action = self.fixedAction
+
+        return action
+
+
 
 class StateLessEpsilonQLearning(BaseStateLessAgent):
     """
     standard Q-learning algorithm
     """
 
-    def __init__(self, numActions):
+    def __init__(self, numActions, epsilon=0.05):
         super().__init__(numActions)
+        self.epsilon = epsilon
         self.Q = estimators.baselines.EmpiricalMean( [numActions] )
 
 
@@ -64,14 +83,17 @@ class StateLessEpsilonQLearning(BaseStateLessAgent):
         self.Q.update( newValueOrList=rewards, indexList=actions )
 
 
-    def take_action(self, epsilon=0.05 ):
+
+    def take_action(self, epsilon=None ):
         """
         takes an action according to epsilon greedy policy
         """
-        tempRand = np.random.uniform(1)
+        if type(epsilon)==type(None):
+            epsilon = self.epsilon
+
+        tempRand = np.squeeze( np.random.uniform(0,1,1) )
 
         if tempRand<epsilon:
-
             action = np.random.choice(self.numActions)
 
         else:
