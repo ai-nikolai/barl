@@ -54,8 +54,9 @@ setup(
       package_dir   = {'barl': 'barl'},
 
       install_requires=[
-                        # "numpy",
-                        # "torch",
+                        "numpy",
+                        "matplotlib",
+                        "seaborn<=0.9",
                        ],
 
       python_requires='>=3.6'

@@ -38,6 +38,15 @@ class BaseEstimator(metaclass=ABCMeta):
         raise NotImplementedError
 
 
+class BaseBayesianEstimator(BaseEstimator):
+    """
+    Base Interface for Estimators
+    """
+    @abstractmethod
+    def sample(self):
+        raise NotImplementedError
+
+
 
 
 

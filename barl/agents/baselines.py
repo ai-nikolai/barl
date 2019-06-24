@@ -63,7 +63,7 @@ class FixedActionsSampler(BaseStateLessAgent):
 
 
 
-class StateLessEpsilonQLearning(BaseStateLessAgent):
+class StatelessEpsilonQLearning(BaseStateLessAgent):
     """
     standard Q-learning algorithm
     """
