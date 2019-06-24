@@ -18,7 +18,7 @@
 
 # >>>>>>  Local Imports   <<<<<<<
 from .basic_simulations import *
-from .utils import *
+from .averaged_simulations import *
 ####################################################
 # CODE
 ####################################################
