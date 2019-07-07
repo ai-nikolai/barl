@@ -25,7 +25,8 @@ from setuptools import setup, find_packages
 ####################################################
 
 
-
+with open("README.md", "r") as fh:
+    longDescription = fh.read()
 
 
 ####################################################
@@ -38,8 +39,7 @@ setup(
       #
 
       name          ='barl',
-      version       ='0.0.0.1',
-      description   ='Bayesian Approximate Reinforcement Learning (BARL)',
+      version       ='0.0.0.2',
       url           ='https://github.com/ai-nikolai/barl',
       author        ='nikolai rozanov',
       author_email  ='nikolai.rozanov@gmail.com',
@@ -59,8 +59,13 @@ setup(
                         "seaborn>=0.9",
                        ],
 
-      python_requires='>=3.6'
+      python_requires='>=3.6',
 
-      )
-
+      #
+      # DESCRIPTION
+      #
+      description   ='Bayesian Approximate Reinforcement Learning (BARL)',
+      long_description=longDescription,
+      long_description_content_type="text/markdown",
+    )
 # EOF

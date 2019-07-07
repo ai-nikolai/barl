@@ -17,7 +17,7 @@
 # >>>>>>  Package Imports <<<<<<<
 
 # >>>>>>  Local Imports   <<<<<<<
-from . import baselines
+from .baselines import EmpiricalMean
 
 
 ####################################################

@@ -27,13 +27,13 @@ import barl
 def random_action_q_learning_experiment():
     env = barl.environments.MultiArmedBandit(arms=4)
 
-    agent1 = barl.agents.baselines.RandomActionsSampler(numActions=4)
+    agent1 = barl.agents.RandomActionsSampler(numActions=4)
 
     total, arlist, _ = barl.simulations.run_state_less_agent_and_env( environment=env, agent=agent1, N=100)
 
     print(total)
 
-    agent2 = barl.agents.baselines.StatelessEpsilonQLearning(numActions=4)
+    agent2 = barl.agents.StatelessEpsilonQLearning(numActions=4)
 
     agent2.learn(arlist)
 
@@ -48,7 +48,7 @@ def random_action_q_learning_experiment():
 def q_learning_experiment(N=10):
     env = barl.environments.MultiArmedBandit(arms=4, means=[0,1,1.5,2], variances=[0.1,0.1,0.1,0.1])
 
-    agent2 = barl.agents.baselines.StatelessEpsilonQLearning(numActions=4)
+    agent2 = barl.agents.StatelessEpsilonQLearning(numActions=4)
 
     total, arlist, _ = barl.simulations.run_and_train_state_less_agent_and_env( environment=env, agent=agent2, N=N)
 
@@ -61,8 +61,8 @@ def q_learning_experiment(N=10):
 def averaged_q_learning_experiment(T=20,N=10):
     env = barl.environments.MultiArmedBandit(arms=4, means=[0,1,1.5,2], variances=[0.1,0.1,0.1,0.1])
 
-    agent2 = barl.agents.baselines.StatelessEpsilonQLearning(numActions=4)
-    agentB = barl.agents.baselines.FixedActionsSampler(numActions=4, fixedAction=3)
+    agent2 = barl.agents.StatelessEpsilonQLearning(numActions=4)
+    agentB = barl.agents.FixedActionsSampler(numActions=4, fixedAction=3)
 
     total, arList, _, trList = barl.simulations.average_simulation_runs(\
             environment = env,

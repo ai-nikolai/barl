@@ -17,8 +17,8 @@
 # >>>>>>  Package Imports <<<<<<<
 
 # >>>>>>  Local Imports   <<<<<<<
-from . import baselines
-
+from .baselines import RandomActionsSampler, FixedActionsSampler
+from .stateless_agents import StatelessEpsilonQLearning
 ####################################################
 # CODE
 ####################################################

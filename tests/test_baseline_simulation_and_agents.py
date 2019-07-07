@@ -30,7 +30,7 @@ def test_averaged_simulation():
 
     env = barl.environments.MultiArmedBandit(arms=4, means=[0,1,1.5,2], variances=[0.1,0.1,0.1,0.1])
 
-    agent2 = barl.agents.baselines.StatelessEpsilonQLearning(numActions=4)
+    agent2 = barl.agents.stateless_agents.StatelessEpsilonQLearning(numActions=4)
     agentB = barl.agents.baselines.FixedActionsSampler(numActions=4, fixedAction=3)
 
     total, arList, t1, trList = barl.simulations.average_simulation_runs(\

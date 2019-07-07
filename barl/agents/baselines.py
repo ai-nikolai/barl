@@ -18,9 +18,7 @@
 import numpy as np
 
 # >>>>>>  Local Imports   <<<<<<<
-from barl import estimators
 from barl.utils import utils
-
 from .interfaces import BaseStateLessAgent
 
 ####################################################
@@ -60,50 +58,6 @@ class FixedActionsSampler(BaseStateLessAgent):
             action = self.fixedAction
 
         return action
-
-
-
-class StatelessEpsilonQLearning(BaseStateLessAgent):
-    """
-    standard Q-learning algorithm
-    """
-
-    def __init__(self, numActions, epsilon=0.05):
-        super().__init__(numActions)
-        self.epsilon = epsilon
-        self.Q = estimators.baselines.EmpiricalMean( [numActions] )
-
-
-    def learn(self, actionRewardTupleList):
-        """
-        Learns from a list of ActionReward Tuples
-        """
-
-        actions, rewards = utils.unzip( actionRewardTupleList )
-        self.Q.update( newValueOrList=rewards, indexList=actions )
-
-
-
-    def take_action(self, epsilon=None ):
-        """
-        takes an action according to epsilon greedy policy
-        """
-        if type(epsilon)==type(None):
-            epsilon = self.epsilon
-
-        tempRand = np.squeeze( np.random.uniform(0,1,1) )
-
-        if tempRand<epsilon:
-            action = np.random.choice(self.numActions)
-
-        else:
-
-            action = np.argmax(self.Q.get_estimate())
-
-        return np.squeeze(action)
-
-
-
 
 
 

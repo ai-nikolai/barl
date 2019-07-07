@@ -34,10 +34,10 @@ class StatelessEpsilonQLearning(BaseStateLessAgent):
     standard Q-learning algorithm
     """
 
-    def __init__(self, numActions, epsilon=0.05):
+    def __init__(self, numActions, epsilon=0.05, estimator=None):
         super().__init__(numActions)
         self.epsilon = epsilon
-        self.Q = estimators.baselines.EmpiricalMean( [numActions] )
+        self.Q = estimators.EmpiricalMean( [numActions] )
 
 
     def learn(self, actionRewardTupleList):
@@ -67,6 +67,7 @@ class StatelessEpsilonQLearning(BaseStateLessAgent):
             action = np.argmax(self.Q.get_estimate())
 
         return np.squeeze(action)
+
 
 
 

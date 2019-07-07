@@ -2,3 +2,6 @@
 barl.egg-info
 __pycache__
 .pytest_cache
+dist
+build
+deploy_to_pypi*
