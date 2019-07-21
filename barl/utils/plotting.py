@@ -30,49 +30,49 @@ from barl.utils.utils import unzip
 ####################################################
 sns.set(style="whitegrid")
 
-def action_reward_barplot(arList, show=True):
+def action_reward_barplot( arList, show=True, name=None ):
     """
     plots a barplot
     """
     data = transform_arlist_to_data(arList)
 
-    sns.barplot(x="actions", y="rewards", data=data)
+    sns.barplot(x="actions", y="rewards", data=data, label=name)
 
     if show:
         plt.show()
 
 
-def plot_reward_over_time_from_ar(arList, show=True):
+def plot_reward_over_time_from_ar( arList, show=True, name=None ):
     """
     plots reward over time
     """
     data = transform_arlist_to_data(arList)
 
-    sns.lineplot( x=data["time"], y=data["rewards"] )
+    sns.lineplot( x=data["time"], y=data["rewards"], label=name )
 
     if show:
         plt.show()
 
 
 
-def plot_reward_over_time(trList, show=True):
+def plot_reward_over_time(trList, show=True, name=None ):
     """
     plots reward over time
     """
     data = transform_trlist_to_data(trList)
 
-    sns.lineplot( x=data["time"], y=data["rewards"] )
+    sns.lineplot( x=data["time"], y=data["rewards"], label=name )
 
     if show:
         plt.show()
 
-def plot_actions_over_time_from_ar(arList, show=True):
+def plot_actions_over_time_from_ar(arList, show=True, name=None ):
     """
     plots reward over time
     """
     data = transform_arlist_to_data(arList)
 
-    sns.lineplot( x=data["time"], y=data["actions"] )
+    sns.lineplot( x=data["time"], y=data["actions"], label=name )
 
     if show:
         plt.show()

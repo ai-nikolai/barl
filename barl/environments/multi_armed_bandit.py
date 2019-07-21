@@ -42,7 +42,7 @@ class MultiArmedBandit(StateLessEnvironment):
 
     def __init__(self, arms=None, means=None, variances=None, distribution="Normal"):
         if arms:
-            self.__arms = arms
+            self.arms = arms
             if not means:
                 means = MultiArmedBandit.get_means( arms )
 
@@ -52,15 +52,15 @@ class MultiArmedBandit(StateLessEnvironment):
             if not means:
                 raise BarlException("Need to provide Means to Multiarmed Bandit")
             else:
-                self.__arms = len(means)
+                self.arms = len(means)
 
             if not variances:
-                variances = MultiArmedBandit.get_variances( self.__arms )
+                variances = MultiArmedBandit.get_variances( self.arms )
 
         self.__means = means
         #to allow single number input
         flag = type(variances)==np.ndarray or type(variances)==list
-        self.__variances = variances if flag else np.ones(self.__arms) * variances
+        self.__variances = variances if flag else np.ones(self.arms) * variances
 
         self.__distribution = distribution
 
@@ -69,13 +69,13 @@ class MultiArmedBandit(StateLessEnvironment):
 
     def sample_rewards(self, action=None, N=1):
         """
-        samples rewards: np.array ( size[arms,N] )
+        samples rewards: np.array ( size[__arms,N] )
         """
         if type(action)==type(None):
 
             outList = []
 
-            for arm in self.arms:
+            for arm in self.__arms:
 
                 outList.append( arm(N) )
 
@@ -83,10 +83,9 @@ class MultiArmedBandit(StateLessEnvironment):
 
         else:
 
-            rewards = self.arms[ int(action) ](N)
+            rewards = self.__arms[ int(action) ](N)
 
         return np.squeeze( rewards )
-
 
 
     def get_true_variances(self):
@@ -105,7 +104,7 @@ class MultiArmedBandit(StateLessEnvironment):
         sets the arm properties
         """
 
-        self.arms = []
+        self.__arms = []
 
         distro = MultiArmedBandit.distributionMapping[self.__distribution]
 
@@ -113,13 +112,13 @@ class MultiArmedBandit(StateLessEnvironment):
 
             temp = partial(distro, mean, variance)
 
-            self.arms.append(temp)
+            self.__arms.append(temp)
 
 
     @staticmethod
     def get_variances(arms = 2):
         """
-        returns [v1,v2, ...v_arms] sampled from ~Unif(0,1)
+        returns [v1,v2, ...v___arms] sampled from ~Unif(0,1)
         """
         return np.random.beta(a=1,b=1,size=[arms])
 
@@ -127,7 +126,7 @@ class MultiArmedBandit(StateLessEnvironment):
     @staticmethod
     def get_means(arms = 2):
         """
-        returns [m1,m2, ...m_arms] sampled from ~Normal(0,1)
+        returns [m1,m2, ...m___arms] sampled from ~Normal(0,1)
         """
         return np.random.normal(loc=0.0, scale=1.0, size=[arms])
 

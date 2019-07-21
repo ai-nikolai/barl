@@ -60,7 +60,7 @@ def q_learning_experiment(N=10):
 
 
 def averaged_q_learning_experiment(T=20, N=10):
-    env = barl.environments.MultiArmedBandit(arms=8, variances=0.1*4)
+    env = barl.environments.MultiArmedBandit(arms=8, variances=0.1*10)
 
     bestAction = np.argmax( env.get_true_means() )
 
@@ -95,13 +95,14 @@ def averaged_q_learning_experiment(T=20, N=10):
 
     # barl.utils.plotting.plot_actions_over_time_from_ar(arList2)
 def averaged_q_learning_and_thompson_sampling_experiment(T=20,N=10):
-    env = barl.environments.MultiArmedBandit(arms=8, variances=0.1*4)
+    env = barl.environments.MultiArmedBandit(means=[0.1,8,8.1,8.2,5,0.2,0.2,0.3], variances=0.1*10)
 
     bestAction = np.argmax( env.get_true_means() )
+    numActions = env.arms
 
-    agentQ = barl.agents.StatelessEpsilonQLearning(numActions=8)
-    agentT = barl.agents.StatelessThompsonSampling(numActions=8)
-    agentB = barl.agents.FixedActionsSampler(numActions=8, fixedAction=bestAction)
+    agentQ = barl.agents.StatelessEpsilonQLearning(numActions=numActions)
+    agentT = barl.agents.StatelessThompsonSampling(numActions=numActions)
+    agentB = barl.agents.FixedActionsSampler(numActions=numActions, fixedAction=bestAction)
 
     total, arList, _, trList = barl.simulations.average_simulation_runs(\
             environment = env,
@@ -133,9 +134,9 @@ def averaged_q_learning_and_thompson_sampling_experiment(T=20,N=10):
     print( str(agentQ.Q) )
     print( str(agentT.Q) )
 
-    barl.utils.plotting.plot_reward_over_time(trList, show=False)
-    barl.utils.plotting.plot_reward_over_time(trList2, show=False)
-    barl.utils.plotting.plot_reward_over_time(trList3, show=False)
+    barl.utils.plotting.plot_reward_over_time(trList, show=False, name="Q Learning" )
+    barl.utils.plotting.plot_reward_over_time(trList2, show=False, name="Thompson Sampling")
+    barl.utils.plotting.plot_reward_over_time(trList3, show=False, name="Best Possible")
 
 
     plt.show()
@@ -147,7 +148,7 @@ def averaged_q_learning_and_thompson_sampling_experiment(T=20,N=10):
 ####################################################
 if __name__=="__main__":
 
-    averaged_q_learning_and_thompson_sampling_experiment(100,10)
+    averaged_q_learning_and_thompson_sampling_experiment(100,1000)
 
 
 
