@@ -46,6 +46,7 @@ class StatelessEpsilonQLearning(BaseStateLessAgent):
         """
 
         actions, rewards = utils.unzip( actionRewardTupleList )
+        print(actions, rewards)
         self.Q.update( newValueOrList=rewards, indexList=actions )
 
 

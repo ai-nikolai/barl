@@ -42,8 +42,8 @@ def test_empirical_mean_2():
     meanEst = EmpiricalMean([3])
 
     values = 2
-    idx = 0
-    out = np.array([2, 0, 0])
+    idx = 1
+    out = np.array([0, 2, 0])
 
     meanEst.update(values, idx)
 
@@ -74,6 +74,26 @@ def test_empirical_mean_4():
 
     assert np.array_equal( out, meanEst.get_estimate() ), "Empirical Mean 4"
 
+
+def test_empirical_mean_5():
+    meanEst = EmpiricalMean([3])
+
+    value1 = 1
+    value2 = 2
+    idx = 2
+
+    out = np.array([0,0,1.5])
+
+    meanEst.update(value1, idx)
+    meanEst.update(value1, idx)
+    meanEst.update(value1, idx)
+
+    meanEst.update(value2, idx)
+    meanEst.update(value2, idx)
+    meanEst.update(value2, idx)
+
+    assert np.array_equal( out, meanEst.get_estimate() ), "Empirical Mean 5"
+    
 ####################################################
 # MAIN
 ####################################################

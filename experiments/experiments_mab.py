@@ -82,6 +82,8 @@ def averaged_q_learning_experiment(T=20,N=10):
 
     print(total2)
 
+    print( str(agent2.Q) )
+
     barl.utils.plotting.plot_reward_over_time(trList, show=False)
     barl.utils.plotting.plot_reward_over_time(trList2, show=False)
 
@@ -95,7 +97,7 @@ def averaged_q_learning_experiment(T=20,N=10):
 ####################################################
 if __name__=="__main__":
 
-    averaged_q_learning_experiment(100,10)
+    averaged_q_learning_experiment(200,10)
 
 
 

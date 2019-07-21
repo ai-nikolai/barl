@@ -65,7 +65,7 @@ def run_and_train_state_less_agent_and_env(agent, environment, N=10):
         action = int( agent.take_action() )
         reward = float( environment.sample_rewards(action=action) )
 
-        arTuple = (action,reward)
+        arTuple = ( action, reward )
         agent.learn( [arTuple] )
 
         ARList.append( arTuple )

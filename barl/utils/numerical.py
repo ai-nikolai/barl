@@ -30,14 +30,17 @@ def one_hot(listOfIndexes, numClasses):
     """
     idxes = np.array( listOfIndexes )
 
-    return np.eye( numClasses )[ idxes.reshape(-1) ]
+    temp = np.eye( numClasses )[ idxes.reshape(-1) ]
 
+    return np.copy(temp)
 
 def transform_to_one_hot(listOfIndexes, numClasses):
     """
     transforms a listOfIndexes into oneHot
     """
-    return np.squeeze( one_hot(listOfIndexes, numClasses) )
+    temp = np.squeeze( one_hot(listOfIndexes, numClasses) )
+
+    return np.copy(temp)
 
 
 
@@ -51,7 +54,9 @@ def transform_to_valued_one_hot(listOfValues, listOfIndexes, numClasses):
 
     vOneHots = oneHots * vals.reshape(-1,1)
 
-    return np.squeeze( vOneHots )
+    temp = np.squeeze( vOneHots )
+
+    return np.copy(temp)
 
 
 

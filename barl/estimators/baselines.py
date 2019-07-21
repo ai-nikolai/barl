@@ -37,6 +37,13 @@ class EmpiricalMean(BaseEstimator):
         self.__shape = self.__value.shape
 
 
+    def __str__(self):
+        """
+        Represents the empricial mean as a string
+        """
+        outStr = str(self.__estimate)
+        return outStr
+
     def update( self , newValueOrList, indexList=None):
         """
         updates the mean
@@ -46,9 +53,9 @@ class EmpiricalMean(BaseEstimator):
         newValue = self.__deal_with_valueList( newValueOrList, indexList )
         oneHotIndexList = self.__deal_with_index( indexList )
 
+
         if newValue.shape == self.__shape:
             self.__update_single_value(newValue, oneHotIndexList)
-
 
 
         elif (newValue.ndim == self.__value.ndim+1) and (newValue.shape[1]==self.__value.shape[0]):
@@ -66,18 +73,17 @@ class EmpiricalMean(BaseEstimator):
 
 
 
-
-
     def __update_single_value(self, newValue, oneHotIndexList=None):
         """
         updates a single value
         """
         if type(oneHotIndexList)==type(None):
-            where = True
+            where = np.ones(self.__shape)
         else:
             where = oneHotIndexList
 
-        self.__value = np.add( self.__value, newValue, where=where>0 )
+        # self.__value = np.add( self.__value, newValue, where=where>0 )
+        self.__value += newValue
 
         self.__count += where
 
@@ -89,7 +95,7 @@ class EmpiricalMean(BaseEstimator):
         updates multiple values
         """
         if type(oneHotIndexList) == type(None):
-            self.__count += newValue.shape[0]
+            self.__count += np.ones(self.__shape) * newValue.shape[0]
 
         else:
             self.__count += np.sum( oneHotIndexList, axis=0 )

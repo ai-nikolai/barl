@@ -39,11 +39,11 @@ setup(
       #
 
       name          ='barl',
-      version       ='0.0.0.2',
+      version       ='0.0.0.4',
       url           ='https://github.com/ai-nikolai/barl',
       author        ='nikolai rozanov',
       author_email  ='nikolai.rozanov@gmail.com',
-      license       ='MIT',
+      license       ='Apache 2.0',
 
       #
       # Actual packages, data and scripts
