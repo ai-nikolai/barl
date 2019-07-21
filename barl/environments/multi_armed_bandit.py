@@ -22,6 +22,7 @@ from functools import partial
 import numpy as np
 
 # >>>>>>  Local Imports   <<<<<<<
+from barl import BarlException
 from .interfaces import StateLessEnvironment
 
 
@@ -40,15 +41,27 @@ class MultiArmedBandit(StateLessEnvironment):
 
 
     def __init__(self, arms=2, means=None, variances=None, distribution="Normal"):
-        if not means:
-            means = MultiArmedBandit.get_means( arms )
+        if arms:
+            self.__arms = arms
+            if not means:
+                means = MultiArmedBandit.get_means( arms )
 
-        if not variances:
-            variances = MultiArmedBandit.get_variances( arms )
+            if not variances:
+                variances = MultiArmedBandit.get_variances( arms )
+        else:
+            if not means:
+                raise BarlException("Need to provide Means to Multiarmed Bandit")
+            else:
+                self.__arms = means.shape[0]
 
-        self.__arms = arms
+            if not variances:
+                variances = MultiArmedBandit.get_variances( self.__arms )
+
         self.__means = means
-        self.__variances = variances
+        #to allow single number input
+        flag = type(variances)==np.ndarray or type(variances)==list
+        self.__variances = variances if flag else np.ones(self.__arms) * variances
+
         self.__distribution = distribution
 
         self.__set_arms()
