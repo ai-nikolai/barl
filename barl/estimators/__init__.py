@@ -18,7 +18,7 @@
 
 # >>>>>>  Local Imports   <<<<<<<
 from .baselines import EmpiricalMean
-
+from .simple_bayesian import NormalMean
 
 ####################################################
 # CODE

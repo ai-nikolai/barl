@@ -34,8 +34,9 @@ class EmpiricalMean(BaseEstimator):
         self.__estimate = np.zeros(size)
         self.__value = np.zeros(size)
         self.__count = np.zeros(size)
-        self.__shape = self.__value.shape
 
+        self.__shape = self.__value.shape
+        self.__ndim = self.__value.ndim
 
     def __str__(self):
         """
@@ -58,7 +59,7 @@ class EmpiricalMean(BaseEstimator):
             self.__update_single_value(newValue, oneHotIndexList)
 
 
-        elif (newValue.ndim == self.__value.ndim+1) and (newValue.shape[1]==self.__value.shape[0]):
+        elif (newValue.ndim == self.__ndim+1) and (newValue.shape[1]==self.__shape[0]):
             self.__update_multiple_values(newValue, oneHotIndexList)
 
         self.__estimate = np.divide(self.__value, self.__count, where=self.__count>0)
@@ -113,7 +114,7 @@ class EmpiricalMean(BaseEstimator):
         if type(index) == type(None):
             outValues = np.array(values)
         else:
-            outValues = numerical.transform_to_valued_one_hot(listOfValues=values,listOfIndexes=index, numClasses=self.__value.shape[0])
+            outValues = numerical.transform_to_valued_one_hot( listOfValues=values, listOfIndexes=index, numClasses=self.__shape[0] )
 
         return outValues
 
@@ -127,7 +128,7 @@ class EmpiricalMean(BaseEstimator):
         if type(index) == type(None):
             return None
         else:
-            outIndex = numerical.transform_to_one_hot(index, numClasses=self.__value.shape[0])
+            outIndex = numerical.transform_to_one_hot(index, numClasses=self.__shape[0])
             return outIndex
 
 

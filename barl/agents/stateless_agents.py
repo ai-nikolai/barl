@@ -34,10 +34,11 @@ class StatelessEpsilonQLearning(BaseStateLessAgent):
     standard Q-learning algorithm
     """
 
-    def __init__(self, numActions, epsilon=0.05, estimator=None):
+    def __init__(self, numActions, epsilon=0.05, epsilonDecayRate=0.99, estimator=None):
         super().__init__(numActions)
         self.epsilon = epsilon
-        self.Q = estimators.EmpiricalMean( [numActions] )
+        self.epsilon_decay_rate = epsilonDecayRate
+        self.Q = estimators.NormalMean( [numActions] )
 
 
     def learn(self, actionRewardTupleList):
@@ -46,10 +47,11 @@ class StatelessEpsilonQLearning(BaseStateLessAgent):
         """
 
         actions, rewards = utils.unzip( actionRewardTupleList )
-        print(actions, rewards)
+
         self.Q.update( newValueOrList=rewards, indexList=actions )
 
-
+        # TODO Add multiple decays
+        self.decay_epsilon()
 
     def take_action(self, epsilon=None ):
         """
@@ -72,9 +74,46 @@ class StatelessEpsilonQLearning(BaseStateLessAgent):
 
 
 
+    def decay_epsilon(self):
+        """
+        decays epsilon at one time step
+        """
+        self.epsilon = self.epsilon * self.epsilon_decay_rate
 
 
 
+
+
+class StatelessThompsonSampling(BaseStateLessAgent):
+    """
+    standard Q-learning algorithm
+    """
+
+    def __init__(self, numActions, epsilon=0.05, epsilonDecayRate=0.99, estimator=None):
+        super().__init__(numActions)
+        self.epsilon = epsilon
+        self.epsilon_decay_rate = epsilonDecayRate
+        self.Q = estimators.NormalMean( [numActions] )
+
+
+    def learn(self, actionRewardTupleList):
+        """
+        Learns from a list of ActionReward Tuples
+        """
+
+        actions, rewards = utils.unzip( actionRewardTupleList )
+
+        self.Q.update( newValueOrList=rewards, indexList=actions )
+
+
+    def take_action(self, epsilon=None ):
+        """
+        takes an action according to epsilon greedy policy
+        """
+
+        action = np.argmax( self.Q.sample() )
+
+        return np.squeeze(action)
 
 
 

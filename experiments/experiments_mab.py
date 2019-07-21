@@ -46,7 +46,7 @@ def random_action_q_learning_experiment():
 
 
 def q_learning_experiment(N=10):
-    env = barl.environments.MultiArmedBandit(arms=4, means=[0,1,1.5,2], variances=[0.1,0.1,0.1,0.1])
+    env = barl.environments.MultiArmedBandit(arms=8, means=[0,1,1.5,2,-1,3,4,3.9], variances=[0.1,0.1,0.1,0.1, 0.1,0.1,0.1,0.1])
 
     agent2 = barl.agents.StatelessEpsilonQLearning(numActions=4)
 
@@ -59,14 +59,15 @@ def q_learning_experiment(N=10):
 
 
 def averaged_q_learning_experiment(T=20,N=10):
-    env = barl.environments.MultiArmedBandit(arms=4, means=[0,1,1.5,2], variances=[0.1,0.1,0.1,0.1])
+    env = barl.environments.MultiArmedBandit(arms=8, means=[0,1,1.5,2,-1,3,4,3.9], variances=[0.1,0.1,0.1,0.1, 0.1,0.1,0.1,0.1]*4)
 
-    agent2 = barl.agents.StatelessEpsilonQLearning(numActions=4)
-    agentB = barl.agents.FixedActionsSampler(numActions=4, fixedAction=3)
+    agentQ = barl.agents.StatelessEpsilonQLearning(numActions=8)
+    agentT = barl.agents.StatelessThompsonSampling(numActions=8)
+    agentB = barl.agents.FixedActionsSampler(numActions=8, fixedAction=6)
 
     total, arList, _, trList = barl.simulations.average_simulation_runs(\
             environment = env,
-            agent   = agent2,
+            agent   = agentQ,
             simulationFunction  = barl.simulations.run_and_train_state_less_agent_and_env,
             T   = T,
             N   = N )
@@ -75,29 +76,40 @@ def averaged_q_learning_experiment(T=20,N=10):
 
     total2, arList2, _, trList2 = barl.simulations.average_simulation_runs(\
             environment = env,
-            agent   = agentB,
+            agent   = agentT,
             simulationFunction  = barl.simulations.run_and_train_state_less_agent_and_env,
             T   = T,
             N   = N )
 
     print(total2)
 
-    print( str(agent2.Q) )
+    total3, arList3, _, trList3 = barl.simulations.average_simulation_runs(\
+            environment = env,
+            agent   = agentB,
+            simulationFunction  = barl.simulations.run_and_train_state_less_agent_and_env,
+            T   = T,
+            N   = N )
+
+    print(total3)
+
+    print( str(agentQ.Q) )
+    print( str(agentT.Q) )
 
     barl.utils.plotting.plot_reward_over_time(trList, show=False)
     barl.utils.plotting.plot_reward_over_time(trList2, show=False)
+    barl.utils.plotting.plot_reward_over_time(trList3, show=False)
 
 
     plt.show()
 
-    barl.utils.plotting.plot_actions_over_time_from_ar(arList)
+    barl.utils.plotting.plot_actions_over_time_from_ar(arList2)
 
 ####################################################
 # MAIN
 ####################################################
 if __name__=="__main__":
 
-    averaged_q_learning_experiment(200,10)
+    averaged_q_learning_experiment(1000,10)
 
 
 
