@@ -40,7 +40,7 @@ class MultiArmedBandit(StateLessEnvironment):
     }
 
 
-    def __init__(self, arms=2, means=None, variances=None, distribution="Normal"):
+    def __init__(self, arms=None, means=None, variances=None, distribution="Normal"):
         if arms:
             self.__arms = arms
             if not means:
@@ -52,7 +52,7 @@ class MultiArmedBandit(StateLessEnvironment):
             if not means:
                 raise BarlException("Need to provide Means to Multiarmed Bandit")
             else:
-                self.__arms = means.shape[0]
+                self.__arms = len(means)
 
             if not variances:
                 variances = MultiArmedBandit.get_variances( self.__arms )
