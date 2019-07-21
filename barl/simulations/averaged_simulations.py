@@ -15,6 +15,7 @@
 # >>>>>>  Native Imports  <<<<<<<
 
 # >>>>>>  Package Imports <<<<<<<
+import numpy as np
 
 # >>>>>>  Local Imports   <<<<<<<
 
@@ -29,7 +30,7 @@ def average_simulation_runs(agent, environment, simulationFunction, T=20, N=10):
     -simulation function needs to accept: agent, environment, **params
     -simulation function needs to return: totalReward, arList, NumOfSimulations
     """
-    totalReward = 0
+    totalRewardList = []
     timeSteps = range(T)
     accumulatedTRList = []
 
@@ -37,16 +38,18 @@ def average_simulation_runs(agent, environment, simulationFunction, T=20, N=10):
 
         totalR, arList, _ = simulationFunction(agent, environment, N=T)
 
-        totalReward += totalR
+        totalRewardList.append( totalR )
 
         rewards = [x for _,x in arList]
 
         accumulatedTRList.extend( list( zip( timeSteps, rewards ) ) )
 
 
-    totalReward /= N
+    totalRewardMu = np.mean(totalRewardList)
+    totalRewardStd = np.std(totalRewardList)
 
-    return totalReward, arList, T, accumulatedTRList
+
+    return (totalRewardMu,totalRewardStd), arList, T, accumulatedTRList
 
 
 
