@@ -17,11 +17,11 @@
 # >>>>>>  Package Imports <<<<<<<
 
 # >>>>>>  Local Imports   <<<<<<<
+from .types import BarlException
 from . import agents
 from . import environments
 from . import simulations
 from . import utils
-
 ####################################################
 # CODE
 ####################################################

@@ -42,7 +42,7 @@ class EmpiricalMean(BaseEstimator):
         """
         Represents the empricial mean as a string
         """
-        outStr = str(self.__estimate)
+        outStr = "Means: " + str(self.__estimate)
         return outStr
 
     def update( self , newValueOrList, indexList=None):

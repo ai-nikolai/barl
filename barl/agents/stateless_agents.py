@@ -38,7 +38,7 @@ class StatelessEpsilonQLearning(BaseStateLessAgent):
         super().__init__(numActions)
         self.epsilon = epsilon
         self.epsilon_decay_rate = epsilonDecayRate
-        self.Q = estimators.NormalMean( [numActions] )
+        self.Q = estimators.EmpiricalMean( [numActions] )
 
 
     def learn(self, actionRewardTupleList):

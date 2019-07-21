@@ -44,7 +44,7 @@ class NormalMean(BaseBayesianEstimator):
         """
         Represents the empricial mean as a string
         """
-        outStr = str(self.__means) + '\n' str(self.__variances)
+        outStr = "Means: " + str(self.__means) + '\n' + "Variances: " + str(self.__variances)
         return outStr
 
     def update( self , newValueOrList, indexList=None):
