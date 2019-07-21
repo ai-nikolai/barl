@@ -16,6 +16,7 @@
 
 # >>>>>>  Package Imports <<<<<<<
 import matplotlib.pyplot as plt
+import numpy as np
 
 # >>>>>>  Local Imports   <<<<<<<
 import barl
@@ -59,11 +60,13 @@ def q_learning_experiment(N=10):
 
 
 def averaged_q_learning_experiment(T=20,N=10):
-    env = barl.environments.MultiArmedBandit(arms=8, means=[0,1,1.5,2,-1,3,4,3.9], variances=[0.1,0.1,0.1,0.1, 0.1,0.1,0.1,0.1]*4)
+    env = barl.environments.MultiArmedBandit(arms=8, variances=0.1*4)
+
+    bestAction = np.argmax( env.get_true_means() )
 
     agentQ = barl.agents.StatelessEpsilonQLearning(numActions=8)
     agentT = barl.agents.StatelessThompsonSampling(numActions=8)
-    agentB = barl.agents.FixedActionsSampler(numActions=8, fixedAction=6)
+    agentB = barl.agents.FixedActionsSampler(numActions=8, fixedAction=bestAction)
 
     total, arList, _, trList = barl.simulations.average_simulation_runs(\
             environment = env,
@@ -102,14 +105,14 @@ def averaged_q_learning_experiment(T=20,N=10):
 
     plt.show()
 
-    barl.utils.plotting.plot_actions_over_time_from_ar(arList2)
+    # barl.utils.plotting.plot_actions_over_time_from_ar(arList2)
 
 ####################################################
 # MAIN
 ####################################################
 if __name__=="__main__":
 
-    averaged_q_learning_experiment(1000,10)
+    averaged_q_learning_experiment(100,10)
 
 
 
