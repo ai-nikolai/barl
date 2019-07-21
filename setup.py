@@ -38,12 +38,12 @@ setup(
       # SETUP
       #
 
-      name          ='barl',
-      version       ='0.0.0.4',
-      url           ='https://github.com/ai-nikolai/barl',
-      author        ='nikolai rozanov',
-      author_email  ='nikolai.rozanov@gmail.com',
-      license       ='Apache 2.0',
+      name          = 'barl',
+      version       = '0.0.0.5',
+      url           = 'https://github.com/ai-nikolai/barl',
+      author        = 'nikolai rozanov',
+      author_email  = 'nikolai.rozanov@gmail.com',
+      license       = 'Apache 2.0',
 
       #
       # Actual packages, data and scripts
@@ -51,7 +51,7 @@ setup(
 
       packages      = find_packages(),
 
-      package_dir   = {'barl': 'barl'},
+      package_dir   = { 'barl' : 'barl' },
 
       install_requires=[
                         "numpy",

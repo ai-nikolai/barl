@@ -24,7 +24,7 @@ from barl import environments
 
 
 def test_that_MAB_works():
-    mab = environments.MultiArmedBandit()
+    mab = environments.MultiArmedBandit(arms=2)
 
     rewards = mab.sample_rewards(N=3)
 
@@ -32,7 +32,7 @@ def test_that_MAB_works():
 
 
 def test_that_MAB_samples_actions_correctly():
-    mab = environments.MultiArmedBandit()
+    mab = environments.MultiArmedBandit(arms=2)
 
     rewards = mab.sample_rewards(action=0)
 
